@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+
+<head> 
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet"> 
+
+    <link rel="stylesheet" href="/templates/styleartist.css">
+
+    <title>Groupie tracker</title>
+
+  
+
+</head>
+
+<body>
+
+<div>
+        <form class="form-inline" action="/" method="POST">
+            <input type="submit" class="btn btn-light" value="back">
+        </form>
+    </div>
+
+    
+<div class="container">
+        <img class="img" src={{.Image}} width="320" alt={{.Name}}>
+
+            <h1>{{.Name}}</h1>
+            <p><b>Creation Date:</b> {{.CreationDate}} </p>
+               <p><b>First Album Released:</b> {{.FirstAlbum}}</p>
+            <p><b>Members:</b> {{range .Members}} {{.}}, {{end}}</p>
+            <div class="relation">
+              <br><b>Concerts:</b><br>
+                    {{range $key, $value := .DatesLocations}}
+                    <div class="locations">
+                        <b>{{$key}}</b><br>
+                    </div>
+                    {{range $value}}
+                    <div class="dates">{{.}}</div>
+                    <br> {{end}} {{end}}
+                
+            </div>
+                
+              
+
+</div>
+       
+  
+
+
+
+
+
+
+
+        
+</body>
+</html>

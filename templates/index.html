@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+
+<head> 
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Groupie tracker</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet"> 
+
+    <link rel="stylesheet" href="/templates/style.css">
+
+</head>
+
+<body>
+
+   
+   
+        <div class="artists">
+        {{range .}}
+        <div class="artist">
+        <form action="/artist" method="POST">
+        <input type="image" src="{{.Image}}" class="imgBorder">
+        <p>{{.Name}}</p>
+     
+          <input name="id" value="{{.Id}}" type ="hidden">
+        </div>
+          
+        </form>
+            {{end}}
+        </div>
+ 
+
+
+</body>
+        
+</html>
