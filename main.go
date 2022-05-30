@@ -59,15 +59,18 @@ type DatesIndex struct {
 type LocationsIndex struct {
 	Index []Locations `json:"index"`
 }
+
 type RelationsIndex struct {
 	Index []Relation `json:"index"`
 }
 
-var allArtistsData []AllArtists
-var artistsData []Artist
-var datesData DatesIndex
-var locationsData LocationsIndex
-var relationsData RelationsIndex
+var (
+	allArtistsData []AllArtists
+	artistsData    []Artist
+	datesData      DatesIndex
+	locationsData  LocationsIndex
+	relationsData  RelationsIndex
+)
 
 func main() {
 	GetRelationsData()
@@ -83,13 +86,17 @@ func main() {
 	if err != nil {
 		log.Fatal("Listen and Server", err)
 	}
-
 }
 
 func mainHandler(w http.ResponseWriter, r *http.Request) {
 	err := GetData()
 	if err != nil {
 		errors.New("Error by get data")
+	}
+
+	if r.URL.Path != "/" {
+		http.Redirect(w, r, "templates/404.html", http.StatusFound)
+		return
 	}
 
 	tmpl, err := template.ParseFiles("templates/index.html")
@@ -104,9 +111,13 @@ func mainHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func artistHandler(w http.ResponseWriter, r *http.Request) {
-
 	idStr := r.FormValue("id")
 	id, _ := strconv.Atoi(idStr)
+
+	if r.URL.Path != "/artist" {
+		http.Redirect(w, r, "templates/404.html", http.StatusFound)
+		return
+	}
 
 	for _, artist := range allArtistsData {
 		if artist.Id == id {
@@ -129,7 +140,6 @@ func GetArtistsData() error {
 	resp, err := http.Get("https://groupietrackers.herokuapp.com/api/artists")
 	if err != nil {
 		return errors.New("Error")
-
 	}
 	defer resp.Body.Close()
 
@@ -139,7 +149,6 @@ func GetArtistsData() error {
 	}
 	json.Unmarshal(bytes, &artistsData)
 	return nil
-
 }
 
 func GetDatesData() error {
@@ -185,7 +194,6 @@ func GetRelationsData() {
 		return
 	}
 	json.Unmarshal(bytes, &relationsData)
-
 }
 
 func GetData() error {

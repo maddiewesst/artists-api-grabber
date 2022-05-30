@@ -1,5 +1,12 @@
 html {
-    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+}
+
+P {
+    max-width: 300px;
 }
 
 *,
@@ -12,4 +19,3 @@ body {
     background-color: rgb(218, 216, 216);
     font-family: 'Montserrat', sans-serif;
 }
-
