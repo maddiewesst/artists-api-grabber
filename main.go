@@ -116,7 +116,7 @@ func artistHandler(w http.ResponseWriter, r *http.Request) {
 
 	if r.URL.Path != "/artist" {
 		http.Redirect(w, r, "templates/404.html", http.StatusFound)
-		return
+		returnc
 	}
 
 	for _, artist := range allArtistsData {
