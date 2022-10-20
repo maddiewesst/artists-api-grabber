@@ -1,15 +1,16 @@
 html {
     display: flex;
-    align-items: center;
     align-content: center;
     justify-content: center;
+    align-items: center;
     text-align: center;
+    background-color:rgb(245, 245, 245);
+    font-family: 'Montserrat', sans-serif;
 }
 
-.btn.btn-light {
+.btn {
     padding: 5px 15px 5px 15px;
-    color: #555252;
-    border: 1px solid hsl(0, 1%, 16%);
+    border: 1px solid hsl(0, 0%, 74%);
     margin-bottom: 10px;
     border-radius: 8px;
 }
@@ -24,14 +25,11 @@ P {
     box-sizing: inherit;
 }
 
-body {
-    background-color: rgb(218, 216, 216);
-    font-family: 'Montserrat', sans-serif;
-}
+
 
 
 .container {
-    background: rgb(189, 188, 188);
     border-radius: 28px;
+    box-shadow: 0.1rem 0.4rem 0.4rem rgb(139, 139, 139);
     padding: 50px;
 }
