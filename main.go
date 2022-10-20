@@ -74,6 +74,9 @@ var (
 
 func main() {
 	GetRelationsData()
+	GetArtistsData()
+	GetLocationsData()
+	GetDatesData()
 
 	fs := http.FileServer(http.Dir("templates"))
 	http.Handle("/templates/", http.StripPrefix("/templates/", fs))
@@ -89,10 +92,7 @@ func main() {
 }
 
 func mainHandler(w http.ResponseWriter, r *http.Request) {
-	err := GetData()
-	if err != nil {
-		errors.New("Error by get data")
-	}
+	GetData()
 
 	if r.URL.Path != "/" {
 		http.Redirect(w, r, "templates/404.html", http.StatusFound)
@@ -200,13 +200,7 @@ func GetData() error {
 	if len(allArtistsData) != 0 {
 		return nil
 	}
-	err1 := GetArtistsData()
-	err2 := GetLocationsData()
-	err3 := GetDatesData()
 
-	if err1 != nil || err2 != nil || err3 != nil {
-		return errors.New("Error by get data artists, locations, dates")
-	}
 	for i := range artistsData {
 		var temp AllArtists
 		temp.Id = i + 1
